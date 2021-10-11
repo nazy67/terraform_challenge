@@ -25,7 +25,7 @@ variable "enabled_dns_hostnames" {
   description = "enabling dns hostnames"
 }
 
-variable "rt_cidr_block" {
+variable "cidr_block" {
   type        = string
   description = "route table cidr block"
 }
