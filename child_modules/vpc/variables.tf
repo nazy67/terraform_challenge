@@ -1,62 +1,76 @@
 # Providers variables
 variable "aws_region" {
   type        = string
-  description = " aws region to deploy infra"
+  description = "The region Terraform deploys your infra"
   default = ""
 }
 
 # VPC variables
 variable "vpc_cidr_block" {
   type        = string
-  description = "cidr block for vpc"
+  description = "CIDR block for the VPC"
   default = ""
 }
 
 variable "instance_tenancy" {
   type        = string
-  description = "vpc tenancy default/dedicated"
+  description = "the tenancy of existing VPCs from dedicated to default instantly"
   default = ""
 }
 
-variable "enabled_dns_support" {
+variable "is_enabled_dns_support" {
   type        = bool
   description = "enabling dns support"
+  default = true
 }
 
-variable "enabled_dns_hostnames" {
+variable "is_enabled_dns_hostnames" {
   type        = bool
   description = "enabling dns hostnames"
+  default = true
 }
 
 variable "cidr_block" {
+  description = "ingress/egress cidr block"
   type        = string
-  description = "route table cidr block"
   default = ""
 }
 
 # Subnet variables
-variable "subnet_azs" {
-  type        = list(string)
-  description = "az's where infra will be deployed"
-  default     = []
+variable "aws_az_1a" {
+  type        = string
+  description = "The region Terraform deploys your infra"
+  default = ""
 }
 
-variable "name_list" {
-  type = list(string)
-  description = "subnet name list"
-  default     = []
+variable "aws_az_1b" {
+  type        = string
+  description = "The region Terraform deploys your infra"
+  default = ""
 }
 
-variable "pub_cidr_subnet" {
-  type        = list(string)
-  description = "cird blocks for public subnets"
-  default     = []
+variable "pub_cidr1_subnet" {
+  type        = string
+  description = "CIDR block for the  1st public subnet"
+  default = ""
 }
 
-variable "priv_cidr_subnet" {
-  type        = list(string)
-  description = "cidr blocks for private subnets"
-  default     = []
+variable "pub_cidr2_subnet" {
+  type        = string
+  description = "CIDR block for the 2nd public subnet"
+  default = ""
+}
+
+variable "priv_cidr1_subnet" {
+  type        = string
+  description = "CIDR block for the 1st private subnet"
+  default = ""
+}
+
+variable "priv_cidr2_subnet" {
+  type        = string
+  description = "CIDR block for the 2nd private subnet"
+  default = ""
 }
 
 # Tags variables
