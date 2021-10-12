@@ -19,6 +19,20 @@ variable "dest_cidr_block" {
   default     = "0.0.0.0/0"
 }
 
+# # subnet variables
+# variable "pub_subnet_id" {
+#   type        = string
+#   description = "cird blocks for public subnets"
+#   default     = ""
+# }
+
+# # route table variables
+# variable "pub_route_table_id" {
+#   type        = string
+#   description = "cidr blocks for private subnets"
+#   default     = ""
+# }
+
 # internet gateway variable
 variable "igw_id" {
   type        = string
