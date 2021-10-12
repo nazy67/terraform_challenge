@@ -5,6 +5,13 @@ variable "aws_region" {
   default = ""
 }
 
+# vpc id variable
+variable "vpc_id" {
+  description = "specify id of the vpc"
+  type        = string
+  default     = ""
+}
+
 # subnet variables
 variable "subnet_azs" {
   type        = list(string)
