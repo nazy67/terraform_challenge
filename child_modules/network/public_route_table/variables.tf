@@ -26,6 +26,13 @@ variable "dest_cidr_block" {
   default     = ""
 }
 
+# subnet variables
+variable "subnet_azs" {
+  type        = list(string)
+  description = "az's where infra will be deployed"
+  default     = []
+}
+
 # tag variables
 variable "env" {
   type        = string
