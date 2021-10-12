@@ -1,7 +1,7 @@
 # public subnets
 resource "aws_subnet" "public_subnet" {
   count             = length(var.subnet_azs)
-  vpc_id            = aws_vpc.vpc.id
+  vpc_id            = var.vpc_id
   cidr_block        = element(var.pub_cidr_subnet, count.index)
   availability_zone = element(var.subnet_azs, count.index)
   tags = merge(
