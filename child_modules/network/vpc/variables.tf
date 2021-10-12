@@ -1,85 +1,88 @@
 # Providers variables
 variable "aws_region" {
   type        = string
-  description = " aws region to deploy infra"
-  default = ""
+  description = "The region Terraform deploys your infra"
 }
 
 # VPC variables
 variable "vpc_cidr_block" {
   type        = string
-  description = "cidr block for vpc"
-  default = ""
+  description = "CIDR block for the VPC"
 }
 
 variable "instance_tenancy" {
   type        = string
-  description = "vpc tenancy default/dedicated"
-  default = ""
+  description = "the tenancy of existing VPCs from dedicated to default instantly"
 }
 
-variable "enabled_dns_support" {
+variable "is_enabled_dns_support" {
   type        = bool
   description = "enabling dns support"
 }
 
-variable "enabled_dns_hostnames" {
+variable "is_enabled_dns_hostnames" {
   type        = bool
   description = "enabling dns hostnames"
 }
 
 variable "cidr_block" {
+  description = "ingress/egress cidr block"
   type        = string
-  description = "route table cidr block"
-  default = ""
 }
 
 # Subnet variables
-variable "subnet_azs" {
-  type        = list(string)
-  description = "az's where infra will be deployed"
-  default     = []
+variable "aws_az_1a" {
+  type        = string
+  description = "The region Terraform deploys your infra"
 }
 
-variable "name_list" {
-  type = list(string)
-  description = "subnet name list"
-  default     = []
+variable "aws_az_1b" {
+  type        = string
+  description = "The region Terraform deploys your infra"
 }
 
-variable "pub_cidr_subnet" {
-  type        = list(string)
-  description = "cird blocks for public subnets"
-  default     = []
+variable "aws_az_1c" {
+  type        = string
+  description = "The region Terraform deploys your infra"
 }
 
-variable "priv_cidr_subnet" {
-  type        = list(string)
-  description = "cidr blocks for private subnets"
-  default     = []
+variable "pub_cidr1_subnet" {
+  type        = string
+  description = "CIDR block for the  1st public subnet"
+}
+
+variable "pub_cidr2_subnet" {
+  type        = string
+  description = "CIDR block for the 2nd public subnet"
+}
+
+variable "pub_cidr3_subnet" {
+  type        = string
+  description = "CIDR block for the 2nd public subnet"
+}
+
+variable "priv_cidr1_subnet" {
+  type        = string
+  description = "CIDR block for the 1st private subnet"
+}
+
+variable "priv_cidr2_subnet" {
+  type        = string
+  description = "CIDR block for the 2nd private subnet"
+}
+
+variable "priv_cidr3_subnet" {
+  type        = string
+  description = "CIDR block for the 2nd private subnet"
 }
 
 # Tags variables
 variable "env" {
   type        = string
-  description = "environment name"
-  default = ""
+  description = "name of the environment"
 }
 
-variable "managed_by" {
+variable "project_name" {
   type        = string
-  description = "managed by tr or cfn"
-  default = ""
-}
-
-variable "owner" {
-  type        = string
-  description = "owner of the resources"
-  default = ""
-}
-
-variable "giturl" {
-  type        = string
-  description = "git url to the template"
-  default = ""
+  description = "name of the project"
 }
