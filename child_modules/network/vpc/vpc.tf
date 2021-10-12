@@ -37,18 +37,6 @@ resource "aws_subnet" "public_subnet_2" {
   )
 }
 
-resource "aws_subnet" "public_subnet_3" {
-  vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = var.pub_cidr3_subnet
-  availability_zone = var.aws_az_1c
-  tags = merge(
-    local.common_tags,
-    {
-      Name = "${var.env}_pub_sub3"
-    }
-  )
-}
-
 # Private Subnets
 resource "aws_subnet" "private_subnet_1" {
   vpc_id            = aws_vpc.my_vpc.id
@@ -70,18 +58,6 @@ resource "aws_subnet" "private_subnet_2" {
     local.common_tags,
     {
       Name = "${var.env}_priv_sub2"
-    }
-  )
-}
-
-resource "aws_subnet" "private_subnet_3" {
-  vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = var.priv_cidr3_subnet
-  availability_zone = var.aws_az_1c
-  tags = merge(
-    local.common_tags,
-    {
-      Name = "${var.env}_priv_sub3"
     }
   )
 }
