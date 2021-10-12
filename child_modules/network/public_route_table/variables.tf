@@ -12,27 +12,6 @@ variable "vpc_id" {
   default     = ""
 }
 
-# cidr block variable
-variable "dest_cidr_block" {
-  type        = string
-  description = "destination cidr block"
-  default     = "0.0.0.0/0"
-}
-
-# subnet az variables
-variable "subnet_azs" {
-  type        = list(string)
-  description = "az's where infra will be deployed"
-  default     = []
-}
-
-# route table variables
-variable "public_subnet" {
-  type        = list(string)
-  description = "cird blocks for public subnets"
-  default     = []
-}
-
 # internet gateway variable
 variable "igw_id" {
   type        = string
@@ -40,10 +19,10 @@ variable "igw_id" {
   default     = ""
 }
 
-# nat gateway variable
-variable "nat_gateway_id" {
+# cidr block variable
+variable "dest_cidr_block" {
   type        = string
-  description = "route table cidr block"
+  description = "destination cidr block"
   default     = ""
 }
 
