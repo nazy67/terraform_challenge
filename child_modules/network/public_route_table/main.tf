@@ -3,7 +3,7 @@ resource "aws_route_table" "pub_rtb" {
   vpc_id = var.vpc_id
 
   route {
-    cidr_block = var.cidr_block
+    cidr_block = var.dest_cidr_block
     gateway_id = var.igw_id
   }
 
