@@ -49,12 +49,6 @@ variable "aws_az_1b" {
   default = ""
 }
 
-variable "aws_az_1c" {
-  type        = string
-  description = "The region Terraform deploys your infra"
-  default = ""
-}
-
 variable "pub_cidr1_subnet" {
   type        = string
   description = "CIDR block for the  1st public subnet"
