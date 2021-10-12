@@ -15,7 +15,7 @@ resource "aws_vpc" "vpc" {
 # Public Subnets
 resource "aws_subnet" "public_subnet" {
   count             = length(var.subnet_azs)
-  vpc_id            = aws_vpc.vpc
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = element(var.pub_cidr_subnet, count.index)
   availability_zone = element(var.subnet_azs, count.index)
   tags = merge(
@@ -29,7 +29,7 @@ resource "aws_subnet" "public_subnet" {
 # Private Subnets
 resource "aws_subnet" "private_subnet" {
   count             = length(var.subnet_azs)
-  vpc_id            = aws_vpc.vpc
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = element(var.priv_cidr_subnet, count.index)
   availability_zone = element(var.subnet_azs, count.index)
   tags = merge(
@@ -42,7 +42,7 @@ resource "aws_subnet" "private_subnet" {
 
 # Internet Gateway
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.vpc
+  vpc_id = aws_vpc.vpc.id
   tags = merge(
     local.common_tags,
     {
@@ -53,7 +53,7 @@ resource "aws_internet_gateway" "igw" {
 
 # Public Route Table
 resource "aws_route_table" "pub_rtb" {
-  vpc_id = aws_vpc.vpc
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block = var.cidr_block
@@ -102,7 +102,7 @@ resource "aws_nat_gateway" "nat_gw" {
 
 # Private Route Table
 resource "aws_route_table" "private_rtb" {
-  vpc_id = aws_vpc.vpc
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block     = var.cidr_block
