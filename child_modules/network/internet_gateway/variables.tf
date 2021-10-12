@@ -4,11 +4,11 @@ variable "aws_region" {
   description = " aws region to deploy infra"
   default = ""
 }
-
+# vpc id variable
 variable "vpc_id" {
   description = "specify id of the vpc"
   type        = string
-  default = ""
+  default     = ""
 }
 
 # tag variables
