@@ -43,7 +43,7 @@ variable "subnet_azs" {
 
 variable "name_list" {
   type = list(string)
-  description = " subnet name list"
+  description = "subnet name list"
   default     = []
 }
 
