@@ -41,6 +41,12 @@ variable "subnet_azs" {
   default     = []
 }
 
+variable "name_list" {
+  type = list(string)
+  description = " subnet name list"
+  default     = []
+}
+
 variable "pub_cidr_subnet" {
   type        = list(string)
   description = "cird blocks for public subnets"
