@@ -7,7 +7,7 @@ resource "aws_subnet" "private_subnet" {
   tags = merge(
     local.common_tags,
     {
-      Name = "${var.env}-infra-${element(var.name_list, count.index)}-privsub-${count.index + 1}"
+      Name = "${var.env}_infra_${element(var.name_list, count.index)}_privsub_${count.index + 1}"
     }
   )
 }
