@@ -2,42 +2,42 @@
 variable "aws_region" {
   type        = string
   description = " aws region to deploy infra"
-  default = ""
+  default     = ""
 }
 
-# # subnet variables
-# variable "pub_subnet_id" {
-#   type        = string
-#   description = "cird blocks for public subnets"
-#   default     = ""
+# # public subnet variables
+# variable "public_subnet" {
+#   type        = list(string)
+#   description = "public subnets"
+#   default     = []
 # }
 
-# public subnet variables
-variable "public_subnet" {
+# subnet variables
+variable "subnet_azs" {
   type        = list(string)
-  description = "public subnets"
+  description = "az's where infra will be deployed"
   default     = []
 }
 
-# internet gateway variable
-variable "igw_id" {
-  type        = string
-  description = "internet gateway id"
-  default     = ""
-}
+# # internet gateway variable
+# variable "igw_id" {
+#   type        = string
+#   description = "internet gateway id"
+#   default     = ""
+# }
 
-# nat gateway variable
-variable "nat_gateway_id" {
-  type        = string
-  description = "route table cidr block"
-  default     = ""
-}
+# # nat gateway variable
+# variable "nat_gateway_id" {
+#   type        = string
+#   description = "route table cidr block"
+#   default     = ""
+# }
 
-variable "pub_route_table_id" {
-  type        = string
-  description = "cidr blocks for private subnets"
-  default     = ""
-}
+# variable "pub_route_table_id" {
+#   type        = string
+#   description = "cidr blocks for private subnets"
+#   default     = ""
+# }
 
 # tags variables
 variable "env" {
