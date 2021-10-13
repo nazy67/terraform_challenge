@@ -1,8 +1,8 @@
 locals {
   common_tags = {
-    Environment = "dev"
-    ManagedBy   = "terraform"
-    Owner       = "nazykh67@gmail.com"
-    GitUrl      = "https://github.com/nazy67/terraform_challenge"
+    Environment = var.env
+    ManagedBy   = var.managed_by
+    Owner       = var.owner
+    GitUrl      = var.giturl
   }
 }
