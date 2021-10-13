@@ -4,14 +4,14 @@ output "vpc_id" {
   value       = module.vpc.module_vpc_id
 }
 
-output "private_subnet_1" {
-  description = "private subnet id 1"
-  value       = module.vpc.module_private_subnet_1
+output "private_subnet_3" {
+  description = "private subnet id 3"
+  value       = module.vpc.module_private_subnet_3
 }
 
-output "private_subnet_2" {
-  description = "private subnet id 2"
-  value       = module.vpc.module_private_subnet_2
+output "private_subnet_4" {
+  description = "private subnet id 4"
+  value       = module.vpc.module_private_subnet_4
 }
 
 output "public_subnet_1" {
