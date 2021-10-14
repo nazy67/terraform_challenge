@@ -23,7 +23,7 @@ module "vpc" {
   giturl     = "https://github.com/nazy67/terraform_challenge"
 }
 
-module "bastion" {
+module "ec2" {
   source = "github.com/nazy67/tf_modules_challenge//ec2"
 
   subnet_id     = module.vpc.public_subnet_2
@@ -67,7 +67,7 @@ module "asg" {
   asg_sg_name   = "web_sg"
   vpc_id        = module.vpc.vpc_id
 
-  bastion_sg = module.bastion.bastion_sg_id
+  ec2_sg     = module.ec2.ec2_sg_id
   lb_sg      = module.alb.lb_sg_id
 
   env        = "dev"
