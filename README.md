@@ -64,12 +64,12 @@ terraform apply
 
 #### Login to the instance in sub1 and take a screenshot of the terminal logged in
 
-<img src="images/terminal.png" alt="aws" width="700" height="150">
+<img src="images/terminal.png" alt="aws" width="600" height="150">
 
 #### SSH from ec2 server in sub1 to webserver in sub4
 
-<img src="images/ssh_2_web.png" alt="aws" width="800" height="90">
+<img src="images/ssh_2_web.png" alt="aws" width="600" height="90">
 
 #### ALB dns on browser
 
-<img src="images/apache.png" alt="aws" width="800" height="150">
+<img src="images/apache.png" alt="aws" width="700" height="150">
