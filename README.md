@@ -46,7 +46,7 @@ terraform apply
 
 ## Diagram
 
-<img src="images/tf_task.png" alt="aws" width="900" height="400">
+<img src="images/tf_task.png" alt="aws" width="900" height="600">
 
 ### Security group configuration
 
