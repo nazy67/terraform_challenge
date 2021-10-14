@@ -73,3 +73,11 @@ terraform apply
 #### ALB dns on browser
 
 <img src="images/apache.png" alt="aws" width="900" height="100">
+
+## Useful links
+
+- [terraform-aws-modules](https://github.com/terraform-aws-modules/terraform-aws-vpc)
+- [terraform-aws-autoscaling](https://github.com/HDE/terraform-aws-autoscaling)
+- [terraform-aws-alb](https://github.com/HDE/terraform-aws-alb)
+- [terraform-aws-s3-bucket](https://github.com/terraform-aws-modules/terraform-aws-s3-bucket)
+- [terraform-aws-ec2-instance](https://github.com/terraform-aws-modules/terraform-aws-ec2-instance)
