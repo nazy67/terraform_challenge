@@ -1,27 +1,27 @@
 # VPC outputs
-output "vpc_id" {
+output "module_vpc_id" {
   description = "vpc id"
-  value       = module.vpc.module_vpc_id
+  value       = module.vpc.vpc_id
 }
 
-output "private_subnet_3" {
+output "module_private_subnet_3" {
   description = "private subnet id 3"
-  value       = module.vpc.module_private_subnet_3
+  value       = module.vpc.private_subnet_3
 }
 
-output "private_subnet_4" {
+output "module_private_subnet_4" {
   description = "private subnet id 4"
-  value       = module.vpc.module_private_subnet_4
+  value       = module.vpc.private_subnet_4
 }
 
-output "public_subnet_1" {
+output "module_public_subnet_1" {
   description = "public subnet id 1"
-  value       = module.vpc.module_public_subnet_1
+  value       = module.vpc.public_subnet_1
 }
 
-output "public_subnet_2" {
+output "module_public_subnet_2" {
   description = "public subnet id 2"
-  value       = module.vpc.module_public_subnet_2
+  value       = module.vpc.public_subnet_2
 }
 
 # Bastion outputs
@@ -95,4 +95,13 @@ output "module_lt_arn" {
 output "module_lt_sg" {
   description = "the name of the launch template sg"
   value       = module.asg.launch_template_sg
+}
+
+# S3 bucket outputs
+output "module_s3_bucket_id" {
+  value = module.s3.s3_bucket_id
+}
+
+output "module_s3_bucket_arn" {
+  value = module.s3.s3_bucket_arn
 }

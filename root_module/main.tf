@@ -4,24 +4,19 @@ provider "aws" {
 
 module "vpc" {
   source = "github.com/nazy67/tf_modules_challenge//vpc"
+ 
+  vpc_cidr_block    = "10.1.0.0/16"
 
-  # VPC 
-  vpc_cidr_block           = "10.1.0.0/16"
-  instance_tenancy         = "default"
-  is_enabled_dns_support   = true
-  is_enabled_dns_hostnames = true
-  cidr_block               = "0.0.0.0/0"
-
-  # Availability zone
-  aws_az_1a = "us-east-1a"
-  aws_az_1b = "us-east-1b"
+  aws_az_1a         = "us-east-1a"
+  aws_az_1b         = "us-east-1b"
 
   pub_cidr1_subnet  = "10.1.0.0/24"
   pub_cidr2_subnet  = "10.1.1.0/24"
   priv_cidr3_subnet = "10.1.2.0/24"
   priv_cidr4_subnet = "10.1.3.0/24"
 
-  # Tags
+  s3_bucket_arn  = module.s3.s3_bucket_arn
+
   env        = "dev"
   managed_by = "terraform"
   owner      = "nazykh67@gmail.com"
@@ -29,27 +24,20 @@ module "vpc" {
 }
 
 module "bastion" {
-  source = "github.com/nazy67/tf_modules_challenge//bastion"
+  source = "github.com/nazy67/tf_modules_challenge//ec2"
 
-  # Instance
-  subnet_id     = module.vpc.module_public_subnet_2
+  subnet_id     = module.vpc.public_subnet_2
   instance_type = "t3.micro"
   image_id      = "ami-02e0bb36c61bb9715"
   key_name      = "new-key"
 
-  # EBS volume
   root_volume_size = 20
   ebs_volume_type  = "gp2"
-  vpc_id           = module.vpc.module_vpc_id
+  vpc_id           = module.vpc.vpc_id
 
-  # SG group
-  rule_type          = "ingress"
-  ssh_port           = 22
-  protocol_type      = "tcp"
   ssh_ip_ingress     = ["108.210.198.102/32"]
   launch_template_sg = module.asg.launch_template_sg
 
-  # Tags
   env        = "dev"
   managed_by = "terraform"
   owner      = "nazykh67@gmail.com"
@@ -59,7 +47,6 @@ module "bastion" {
 module "asg" {
   source = "github.com/nazy67/tf_modules_challenge//asg"
 
-  # Autoscaling group
   asg_name          = "asg"
   min_size          = 2
   max_size          = 6
@@ -67,38 +54,18 @@ module "asg" {
   health_check_type = "ELB"
   target_group_arns = [module.alb.target_group_arn]
 
-  vpc_zone_identifier = [module.vpc.module_private_subnet_4]
-
-  # Launch template
-  name_prefix      = "web_template"
+  vpc_zone_identifier = [module.vpc.private_subnet_4]
+   
+  name_prefix      = "web-template-"
   instance_type    = "t3.micro"
   image_id         = "ami-02e0bb36c61bb9715"
   key_name         = "new-key"
-  security_groups  = [module.asg.launch_template_sg]
+  asg_security_group_ids = [module.asg.launch_template_sg]
   alb_target_group_arn = module.alb.target_group_arn
   user_data_base64 = filebase64("${path.module}/user_data.sh")
 
-  # EBS root volume
-  block_device_mappings = [
-    {
-      device_name = "/dev/xvda"
-      no_device   = 0
-      ebs = {
-        delete_on_termination = true
-        encrypted             = true
-        volume_size           = 20
-        volume_type           = "gp2"
-      }
-    }
-  ]
-
-  # Launch template sg group
   asg_sg_name   = "web_sg"
-  vpc_id        = module.vpc.module_vpc_id
-  rule_type     = "ingress"
-  ssh_port      = 22
-  http_port     = 80
-  protocol_type = "tcp"
+  vpc_id        = module.vpc.vpc_id
 
   bastion_sg = module.bastion.bastion_sg_id
   lb_sg      = module.alb.lb_sg_id
@@ -112,33 +79,19 @@ module "asg" {
 module "alb" {
   source = "github.com/nazy67/tf_modules_challenge//alb"
 
-  # ALB
-  lb_name            = "web-lb"
-  is_internal        = false
-  load_balancer_type = "application"
-  security_groups    = [module.alb.lb_sg_id]
-  public_subnets     = [module.vpc.module_public_subnet_1, module.vpc.module_public_subnet_2]
+  lb_name                = "web-lb"
+  alb_security_group_ids = [module.alb.lb_sg_id]
+  public_subnets         = [module.vpc.public_subnet_1, module.vpc.public_subnet_2]
 
-  # Target group
   target_group_name = "lb-tg"
-  vpc_id            = module.vpc.module_vpc_id
+  vpc_id            = module.vpc.vpc_id
 
-  # HTTP listeners rule
   app_lb_arn       = module.alb.lb_arn
-  action_type      = "forward"
   target_group_arn = module.alb.target_group_arn
 
-
-  # ALB sg group
   lb_sg_name         = "lb_sg"
-  lb_sg_description  = "allow http traffic"
-  cidr_blocks        = ["0.0.0.0/0"]
-  rule_type          = "ingress"
-  http_port          = 80
-  protocol_type      = "tcp"
   launch_template_sg = module.asg.launch_template_sg
 
-  # Tags
   env        = "dev"
   managed_by = "terraform"
   owner      = "nazykh67@gmail.com"
@@ -148,47 +101,10 @@ module "alb" {
 module "s3" {
   source = "github.com/nazy67/tf_modules_challenge//s3"
 
-  bucket_name   = "nazy_main_bucket"
-  is_acl        = "private"
+  bucket_name   = "nazys-main-bucket"
 
-  # S3 bucket-level public access block
-  main_bucket_id          = module.s3.id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-
-  # Lifecycle rule
-  lifecycle_rule {
-    id      = "log"
-    prefix = "log/"
-    enabled = true
-
-    tags = {
-      rule      = "log"
-      autoclean = "true"
-    }
-
-    expiration {
-      days = 90
-    }
-  }
-
-  lifecycle_rule {
-    id      = "images"
-    prefix  = "images/"
-    enabled = true
-
-    transition {
-      days          = 90
-      storage_class = "GLACIER"
-    }
-  }
-
-  tags = merge(
-    local.common_tags,
-    {
-      Name = "${var.env}_s3_main"
-    }
-  )
+  env        = "dev"
+  managed_by = "terraform"
+  owner      = "nazykh67@gmail.com"
+  giturl     = "https://github.com/nazy67/terraform_challenge"
 }
