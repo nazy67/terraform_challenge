@@ -46,7 +46,7 @@ terraform apply
 
 ## Diagram
 
-<img src="images/tf_task.png" alt="aws" width="900" height="600">
+<img src="images/tf_task.png" alt="aws" width="900" height="700">
 
 ### Security group configuration
 
@@ -64,7 +64,7 @@ terraform apply
 
 #### Login to the instance in sub1 and take a screenshot of the terminal logged in
 
-<img src="images/terminal.png" alt="aws" width="800" height="150">
+<img src="images/terminal.png" alt="aws" width="700" height="150">
 
 #### SSH from ec2 server in sub1 to webserver in sub4
 
@@ -72,4 +72,4 @@ terraform apply
 
 #### ALB dns on browser
 
-<img src="images/apache.png" alt="aws" width="800" height="100">
+<img src="images/apache.png" alt="aws" width="800" height="150">
