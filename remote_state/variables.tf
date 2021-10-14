@@ -5,5 +5,5 @@ variable "account_id" {
 
 variable "aws_region" {
     description = "aws_region"
-    default = "us-east-1" # enter region
+    default = "us-east-1"
 }
