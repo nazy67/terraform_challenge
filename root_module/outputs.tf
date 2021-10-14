@@ -25,24 +25,24 @@ output "module_public_subnet_2" {
 }
 
 # Bastion outputs
-output "module_bastion_pub_ip" {
-  description = "public ip of bastion"
-  value       = module.bastion.bastion_public_ip
+output "module_ec2_pub_ip" {
+  description = "public ip of ec2 server"
+  value       = module.ec2.ec2_public_ip
 }
 
-output "module_bastion_state" {
-  description = "bastion hosts state"
-  value       = module.bastion.bastion_state
+output "module_ec2_state" {
+  description = "ec2 server state"
+  value       = module.ec2.ec2_state
 }
 
-output "module_bastion_priv_ip" {
-  description = "bastion hosts private ip"
-  value       = module.bastion.bastion_private_ip
+output "module_ec2_priv_ip" {
+  description = "ec2 server private ip"
+  value       = module.ec2.ec2_private_ip
 }
 
-output "module_bastion_sg_id" {
-  description = "bastion hosts sg id"
-  value       = module.bastion.bastion_sg_id
+output "module_ec2_sg_id" {
+  description = "ec2 server sg id"
+  value       = module.ec2.ec2_sg_id
 }
 
 # ALB outputs

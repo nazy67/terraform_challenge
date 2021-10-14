@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "github.com/nazy67/tf_modules_challenge//vpc"
+  source = "github.com/nazy67/tf_modules//vpc"
  
   vpc_cidr_block    = "10.1.0.0/16"
 
@@ -24,7 +24,7 @@ module "vpc" {
 }
 
 module "ec2" {
-  source = "github.com/nazy67/tf_modules_challenge//ec2"
+  source = "github.com/nazy67/tf_modules//ec2"
 
   subnet_id     = module.vpc.public_subnet_2
   instance_type = "t3.micro"
@@ -36,7 +36,6 @@ module "ec2" {
   vpc_id           = module.vpc.vpc_id
 
   ssh_ip_ingress     = ["108.210.198.102/32"]
-  launch_template_sg = module.asg.launch_template_sg
 
   env        = "dev"
   managed_by = "terraform"
@@ -45,7 +44,7 @@ module "ec2" {
 }
 
 module "asg" {
-  source = "github.com/nazy67/tf_modules_challenge//asg"
+  source = "github.com/nazy67/tf_modules//asg"
 
   asg_name          = "asg"
   min_size          = 2
@@ -77,7 +76,7 @@ module "asg" {
 }
 
 module "alb" {
-  source = "github.com/nazy67/tf_modules_challenge//alb"
+  source = "github.com/nazy67/tf_modules//alb"
 
   lb_name                = "web-lb"
   alb_security_group_ids = [module.alb.lb_sg_id]
@@ -99,7 +98,7 @@ module "alb" {
 }
 
 module "s3" {
-  source = "github.com/nazy67/tf_modules_challenge//s3"
+  source = "github.com/nazy67/tf_modules//s3"
 
   bucket_name   = "nazys-main-bucket"
 
